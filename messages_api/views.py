@@ -16,7 +16,6 @@ class PublicMessageApiView(MessageApiView):
     message = "The API doesn't require an access token to share this message."
 
 
-
 class AuthMessageApiView(MessageApiView):
     message = "The API successfully validated your access token."
 

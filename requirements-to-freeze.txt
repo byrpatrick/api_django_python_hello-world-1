@@ -2,3 +2,7 @@
 Django
 djangorestframework
 django-cors-headers
+python-dotenv
+
+# WSGI server
+gunicorn

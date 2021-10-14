@@ -2,6 +2,7 @@ from django.urls import path
 
 from .views import PublicMessageApiView, AuthMessageApiView, AdminMessageApiView
 
+
 urlpatterns = [
     path('public', PublicMessageApiView.as_view(), name='public-message'),
     path(
