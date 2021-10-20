@@ -139,3 +139,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
    os.environ.get('CLIENT_ORIGIN_URL', 'http://localhost:4040'),
 ]
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'messages_api.views.api_exception_handler',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTTokenUserAuthentication',
+    ],
+}
+
+try:
+    AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
+except KeyError:
+    raise ImproperlyConfigured("Missing AUTH0_DOMAIN environment variable")
+
+try:
+    AUTH0_AUDIENCE = os.environ['AUTH0_AUDIENCE']
+except KeyError:
+    raise ImproperlyConfigured("Missing AUTH0_AUDIENCE environment variable")
+
+SIMPLE_JWT = {
+    'ALGORITHM': 'RS256',
+    'JWK_URL': f'https://{AUTH0_DOMAIN}/.well-known/jwks.json',
+    'AUDIENCE': AUTH0_AUDIENCE,
+    'ISSUER': f'https://{AUTH0_DOMAIN}/',
+    'USER_ID_CLAIM': 'sub',
+    'AUTH_TOKEN_CLASSES': ('authz.tokens.Auth0Token',),
+}
