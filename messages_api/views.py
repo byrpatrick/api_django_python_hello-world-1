@@ -2,6 +2,7 @@ from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import exception_handler
 
+from authz.permissions import HasAdminPermission
 from messages_api.models import Message
 from messages_api.serializers import MessageSerializer
 
@@ -25,7 +26,7 @@ class AuthMessageApiView(MessageApiView):
 
 class AdminMessageApiView(MessageApiView):
     message = "The API successfully recognized you as an admin."
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasAdminPermission]
 
 
 def api_exception_handler(exc, context=None):
