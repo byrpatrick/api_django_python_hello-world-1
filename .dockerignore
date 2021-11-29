@@ -1,0 +1,8 @@
+venv/*
+*.pyc
+*.sqlite3
+.git/
+.env.example
+Makefile
+README.md
+.gitignore
